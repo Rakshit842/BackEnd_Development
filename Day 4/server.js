@@ -22,6 +22,8 @@ app.get('/about', (req,res)=>{
 
 let users = ['rahul', 'jigar', 'manshi', 'ankit']
 
+ 
+
 app.get('/user', (req,res)=>{
 
     res.status(200).json({
@@ -51,6 +53,31 @@ app.post('/createuser' , (req,res)=>{
 
 })
 
+
+app.put('/updateuser', (req,res)=>{
+    let name = req.body.name
+    let newname = req.body.newname
+    let index = users.indexOf(name)
+    users[index] = newname
+    res.status(200).json({
+        message:"users updated successfully....",
+        users,
+        success:true
+    })
+})
+
+
+app.delete('/deleteuser', (req,res)=>{
+
+    let name = req.body.name
+    let index = users.indexOf(name)
+    users.splice(index, 1)
+    res.status(200).json({
+        message:'data deleted successfully..',
+        users,
+        success:true
+    })
+})
   
 
 app.listen(3000, ()=>{
