@@ -20,7 +20,7 @@ const createuser = (req, res) => {
 
     let { name, age, id } = req.body
 
-     
+
 
     // let name = req.body.name
     // let age = req.body.age
@@ -48,39 +48,93 @@ const createuser = (req, res) => {
 }
 
 
-const updateuser = (req,res)=>{
-
-     
+const updateuser = (req, res) => {
 
     const id = Number(req.params.id)
-    
-    let {name, age} = req.body
 
-  
-    let   data = fs.readFileSync('./database/data.json', 'utf-8')
+    let { name, age } = req.body
+
     
+
+
+    let data = fs.readFileSync('./database/data.json', 'utf-8')
+
     data = JSON.parse(data)
-    
-     
-    // let index = data.findIndex((e)=>e.id == id)
 
-    let user = data.find((e)=>e.id === id)
+    let index = data.findIndex((e)=>e.id == id)
 
-    console.log(user)
+    data.splice(index, 1, {name, age, id})
 
 
+    // let user = data.find((element) => element.id === id)
 
-    user.name = name
+    // let user = data.find((element)=>(
+    //      element.id === id)
+    //     )
 
-    user.age = age
- 
-   
+
+    // user[index].name = name
+    // console.log(user)
+
+
+    // if (name) {
+
+    //     user.name = name
+    // }
+
+
+    // if (age) {
+
+    //     user.age = age
+    // }
+
+    fs.writeFileSync('./database/data.json', JSON.stringify(data, null, 3))
+
+    res.status(200).json({
+        message: 'data updated successfully...',
+        data,
+        success: true
+    })
+
 
 
 }
 
- 
 
-export { getuser , createuser }
+
+const deleteuser = (req, res) => {
+
+    console.log('first')
+
+    const id = Number(req.params.id)
+
+
+    let data = fs.readFileSync('./database/data.json', 'utf-8')
+
+    data = JSON.parse(data)
+
+    let index = data.findIndex((element) => {
+        return element.id === id
+    })
+
+
+    data.splice(index, 1)
+
+
+    fs.writeFileSync('./database/data.json', JSON.stringify(data, null, 3))
+
+    res.status(200).json({
+        message: 'data deleted successfully...',
+        success: true,
+        data
+    })
+
+
+
+
+}
+
+
+export { getuser, createuser, updateuser, deleteuser }
 
 

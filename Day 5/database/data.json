@@ -1,12 +1,16 @@
 [
    {
-      "name": "Manshi",
-      "age": 30,
+      "name": "Jigar Singh",
+      "age": 32,
       "id": 2
    },
    {
-      "name": "priti",
-      "age": 23,
+      "name": "Jigar Singh",
       "id": 3
+   },
+   {
+      "name": "manas Singh",
+      "age": 31,
+      "id": 4
    }
 ]
