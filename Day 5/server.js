@@ -3,6 +3,8 @@ import express from 'express'
 
 const app = express()
 
+app.use(express.json())
+
 import router from './routes/userRoute.js'
 
 app.use(router)
