@@ -135,6 +135,24 @@ const deleteuser = (req, res) => {
 }
 
 
+const getuserById = (req,res)=>{
+
+    const id = Number(req.params.id)
+
+    let data = fs.readFileSync('./database/data.json', 'utf-8')
+
+    data= JSON.parse(data)
+
+    let user  = data.find((element)=>element.id === id)
+
+    res.status(200).json({
+        message:'used fetched successfully...',
+        success:true,
+        user
+    })
+
+}
+
 export { getuser, createuser, updateuser, deleteuser }
 
 
