@@ -1,20 +1,22 @@
+
 import express from 'express'
 
-const app = express()
+import connectDB from './database/mongodb.js'
+import router from './routes/userRoutes.js'
 
+const app = express()
 const port = 3000
 
-import connectDB from './database/mongodb.js'
-connectDB()
-
-app.listen(port, ()=>{
-    console.log('server has started at port', port)
-})
-
+// Middleware
 app.use(express.json())
 
-app.use(router)
+// Database connection
+connectDB()
 
-app.listen(port, ()=>{
-    console.log('server has started at port', port)
+// Routes
+app.use('/api/users', router)
+
+// Server
+app.listen(port, () => {
+    console.log('Server has started at port', port)
 })
