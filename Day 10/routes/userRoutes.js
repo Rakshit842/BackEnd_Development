@@ -7,4 +7,6 @@ router.post('/user',creatUser)
 
 router.get('/user', readUser)
 
+router.put('/user/:id', updateUser)
+
 export default router
